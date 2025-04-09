@@ -2,7 +2,7 @@
 FROM node:18
 
 # Create app directory
-WORKDIR /usr/src/app
+WORKDIR /usr/demasy/src/app
 
 # Copy project files
 COPY package*.json ./
