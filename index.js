@@ -1,7 +1,41 @@
 const express = require('express');
+const oracledb = require('oracledb');
+
 const app = express();
 
-app.get('/', (req, res) => res.send('🚀 Hello Demasy! from Node.js in Docker!'));
+// Oracle DB connection config
+const dbConfig = {
+  user: 'system',
+  password: 'Oracle123',
+  connectString: 'localhost:1521/FREE'
+};
+
+// Route to test Oracle DB connection
+app.get('/', async (req, res) => {
+  let connection;
+
+  try {
+    connection = await oracledb.getConnection(dbConfig);
+
+    const result = await connection.execute(
+      `SELECT TO_CHAR(SYSDATE, 'DD/MM/RRRR') AS today FROM dual`
+    );
+
+    const today = result.rows[0][0];
+    res.send(`🚀 Hello Demasy! Today is ${today} from Node.js in Docker connected to Oracle!`);
+  } catch (err) {
+    console.error('DB Connection Error:', err);
+    res.status(500).send('Error connecting to Oracle DB');
+  } finally {
+    if (connection) {
+      try {
+        await connection.close();
+      } catch (err) {
+        console.error('Error closing DB connection:', err);
+      }
+    }
+  }
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App running on http://localhost:${PORT}`));

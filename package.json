@@ -11,6 +11,7 @@
   "author": "Ahmed El-Demasy <founder@demasy.io> (https://github.com/demasy)",
   "license": "MIT",
   "dependencies": {
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "oracledb": "^6.8.0"
   }
 }
