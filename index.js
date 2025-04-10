@@ -5,10 +5,10 @@ const app = express();
 
 // Oracle DB connection config
 const dbConfig = {
-  user: 'system',
-  password: 'Oracle123',
-  connectString: 'localhost:1521/FREE'
-};
+    user: process.env.DEMASY_DB_USER,
+    password: process.env.DEMASY_DB_PASS,
+    connectString: `${process.env.DEMASY_DB_HOST}:${process.env.DEMASY_DB_PORT}/${process.env.DEMASY_DB_SERVICE}`,
+  };
 
 // Route to test Oracle DB connection
 app.get('/', async (req, res) => {
