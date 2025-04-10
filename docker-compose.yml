@@ -9,7 +9,7 @@ services:
       - "5500:5500"
     environment:
       - DATABASE_NAME=DEMASY
-      - ORACLE_PWD=Demasy@1986
+      - ORACLE_PWD=Demasy1986
 
   restful-apis-service:
     build:
@@ -24,7 +24,7 @@ services:
       - DEMASY_DB_PORT=1521
       - DEMASY_DB_SERVICE=FREE
       - DEMASY_DB_USER=system
-      - DEMASY_DB_PASS=Demasy@1986
+      - DEMASY_DB_PASS=Demasy1986
 
 networks:
   default:
